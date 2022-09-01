@@ -1,15 +1,27 @@
 const express = require("express");
 const budget = require("./models/budget");
+const bodyParser = require('body-parser')
 const app = express()
 
+
+// MIDDLEWARE
+app.use(express.static('public'))
+app.use(express.urlencoded({extended: false}))
+
 //INDEX
+
 app.get("/budgets", (req, res) => {
-    res.render("budget_index.ejs")
+    res.render("budget_index.ejs",{
+        budgets: budget,
+       
+    })
 });
 
 //new
 app.get("/budgets/new",(req,res)=>{
-    res.render("budget_new.ejs")
+    res.render("budget_new.ejs",{
+        newBudget: budget
+    })
 })
 //create
 app.post("/budgets", (req, res) => {
@@ -28,10 +40,11 @@ app.post("/budgets", (req, res) => {
 })
 
 // show 
-app.get("/budgets/:index",(req,res)=>{
-    res.render("budget_show.ejs")
+app.get("/budgets/:index", (req, res) => {
+    res.render("budget_show.ejs", {
+        budgetIndex: budget[req.params.index]
+    })
 })
-
 
 
 

@@ -12,7 +12,24 @@
 </head>
 
 <body>
-
+    <body>
+        <div class="container">
+            <h1>Budgtr ALL</h1>
+           
+                <table>
+                    <% for (i = 0; i < budgets.length; i++) { %>
+                        <tr>
+                            <td><%= budgets[i].date %></td>
+                            <td><a href="/budgets/<%= i %>"><%= budgets[i].name %></a></td>
+                            <td><%= budgets[i].from %></td>
+                            <td>$<%= budgets[i].amount %></td>
+                            <td><%= budgets[i].tags.join(", ") %></td>
+                        </tr>
+                        <% } %>
+                    </table>
+                    <button><a href="/budgets/new/">Add New Item</a></button>
+                </div>
+            </body>
 </body>
 
 </html>
